@@ -1,22 +1,30 @@
 <template>
 
   <b-container class="my-4">
-    <h1 class="text-center text-success font-weight-bold">News App</h1>
+    <h1 class="text-center text-success font-weight-bold">NEWS APP</h1>
     <!-- Filters -->
-    <div class="mb-3">
-        <b-input-group prepend="Filter by source" class="mt-3">
+    <div class="mb-4">
+      <b-row>
+         <b-input-group prepend="Filter by source" class="mt-3 col-12 col-sm-6">
             <b-form-input v-model="source" @keyup.enter="bySource"></b-form-input>
             <b-input-group-append>
-              <b-button v-on:click="bySource" variant="info">Button</b-button>
+              <b-button v-on:click="bySource" variant="primary">Search</b-button>
             </b-input-group-append>
         </b-input-group>
 
-        <b-input-group prepend="Filter by title" class="mt-3">
+        <b-input-group prepend="Filter by title" class="mt-3 col-12 col-sm-6">
             <b-form-input v-model="title" @keyup.enter="byTitle"></b-form-input>
             <b-input-group-append>
-              <b-button v-on:click="byTitle" variant="info">Button</b-button>
+              <b-button v-on:click="byTitle" variant="primary">Search</b-button>
             </b-input-group-append>
         </b-input-group>
+
+        <div class="col-md-12 mt-2 text-center">
+        <b-button v-on:click="byTitle" variant="danger">Reset</b-button>
+        </div>
+
+      </b-row>
+       
     </div>
 
     <!-- Scroll Button  -->
@@ -24,28 +32,28 @@
 
     <!-- Cards -->
     <main>
-      <div v-for="(item, index) in news" :key="index" class="py-3 cardHover">
 
-        <a :href="item.url">
-          <b-card
-          data-aos="fade-right"
-          data-aos-delay="70"
-          overlay
-          :img-src="item.urlToImage"
-          img-alt="image.png"
-          text-variant="white"
-          :title="item.source.name "
-          :sub-title="'By' + ' ' + item.author"
-        >
-        <b-button :href="item.url" variant="primary" class="text-white float-right"
-            >Read More
-        </b-button>
-          <b-card-text class="mt-5">
-            {{ item.content }}
-          </b-card-text>
+      <div v-for="(item, index) in news" :key="index" class="py-3 cardHover text-center">
+        <b-card bg-variant="dark" no-body class="text-white" data-aos="fade-right" data-aos-delay="70">
+          <a :href="item.url" class="text-decoration-none">
+            <b-row no-gutters>
+              <b-col md="12">
+                <b-card-img :src="item.urlToImage" alt="image.png"></b-card-img>
+              </b-col>
+              <b-col md="12">
+                <b-card-body class="text-success" :title="item.title" :sub-title="item.source.name + ' | ' + 'By' + ' ' + item.author">
+                  <b-card-text class="text-white">
+                    {{item.content}}
+                  </b-card-text>
+                  <b-button :href="item.url" variant="primary" class="text-white"
+                    >Read More
+                  </b-button>
+                </b-card-body>
+              </b-col>
+            </b-row>
+          </a>
+            
         </b-card>
-        </a>
-        
       </div>
       
     </main> 
@@ -100,7 +108,7 @@ export default {
     },
 
     bySource() {
-      let source = this.news.filter(p => this.source === p.source.name);
+      let source = this.news.filter(p => this.source.toLowerCase() === p.source.name.toLowerCase());
       this.news = source;
       this.source = "";
     }
