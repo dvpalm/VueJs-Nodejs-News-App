@@ -1,6 +1,7 @@
 # Coding-Challenge-Sipal
 
 ## Features
+- VueJs
 - NodeJs local server
 - Display data from [News API](https://newsapi.org/)
 - News filter
