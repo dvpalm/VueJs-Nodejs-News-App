@@ -2,7 +2,7 @@
 
 ## Features
 - VueJs
-- NodeJs local server
+- NodeJs local server with Express/Cors
 - Display data from [News API](https://newsapi.org/)
 - News filter
 
