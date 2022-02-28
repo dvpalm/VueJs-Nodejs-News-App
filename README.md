@@ -1,4 +1,4 @@
-# Coding-Challenge-Sipal
+# News App
 
 ## Features
 - VueJs
